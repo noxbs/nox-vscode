@@ -2,7 +2,7 @@
   "name": "nox-language-support",
   "displayName": "Nox Language Support",
   "description": "Syntax highlighting for Nox build files and task files.",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "publisher": "playfairs",
   "license": "Unlicense",
   "icon": "assets/nox.png",
@@ -11,7 +11,8 @@
     "onStartupFinished",
     "workspaceContains:nox.build",
     "workspaceContains:noxfile",
-    "workspaceContains:nox.state"
+    "workspaceContains:nox.state",
+    "workspaceContains:**/*.nox"
   ],
   "engines": {
     "vscode": "^1.85.0"
@@ -44,12 +45,16 @@
         "aliases": [
           "Nox",
           "nox.build",
-          "noxfile"
+          "noxfile",
+          ".nox"
         ],
         "filenames": [
           "nox.build",
           "noxfile",
           "nox.state"
+        ],
+        "extensions": [
+          ".nox"
         ],
         "configuration": "./language-configuration.json"
       }
