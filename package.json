@@ -2,17 +2,18 @@
   "name": "nox-language-support",
   "displayName": "Nox Language Support",
   "description": "Syntax highlighting for Nox build files and task files.",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "publisher": "playfairs",
   "license": "Unlicense",
-  "icon": "assets/nox.png",
+  "icon": "assets/nox-icon.png",
   "main": "./src/extension.js",
   "activationEvents": [
     "onStartupFinished",
     "workspaceContains:nox.build",
     "workspaceContains:noxfile",
     "workspaceContains:nox.state",
-    "workspaceContains:**/*.nox"
+    "workspaceContains:**/*.nox",
+    "workspaceContains:**/*.noml"
   ],
   "engines": {
     "vscode": "^1.85.0"
@@ -51,12 +52,32 @@
         "filenames": [
           "nox.build",
           "noxfile",
+          "nox.config",
           "nox.state"
         ],
         "extensions": [
           ".nox"
         ],
+        "icon": {
+          "light": "./assets/nox-icon.png",
+          "dark": "./assets/nox-icon.png"
+        },
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "noml",
+        "aliases": [
+          "NOML",
+          "Nox Object Modeling Language"
+        ],
+        "extensions": [
+          ".noml"
+        ],
+        "icon": {
+          "light": "./assets/nox-icon.png",
+          "dark": "./assets/nox-icon.png"
+        },
+        "configuration": "./noml-language-configuration.json"
       }
     ],
     "grammars": [
@@ -64,6 +85,11 @@
         "language": "nox",
         "scopeName": "source.nox",
         "path": "./syntaxes/nox.tmLanguage.json"
+      },
+      {
+        "language": "noml",
+        "scopeName": "source.noml",
+        "path": "./syntaxes/noml.tmLanguage.json"
       }
     ]
   }

@@ -1,6 +1,19 @@
 const assert = require("node:assert/strict");
 const { lintBuild } = require("../src/lint/build");
-const { lintNoxfile } = require("../src/lint");
+const { lintNoml, lintNoxfile } = require("../src/lint");
+
+const noml = `ruleset "commands" {
+  command: build {
+    aliases: ["b"]
+    rules: {
+      requires_project: true
+      accepts_files_as_input: false
+    }
+  }
+}`;
+
+assert.deepEqual(lintNoml(noml), []);
+assert.deepEqual(lintNoml(`ruleset "commands" { command: build {`)[0].message, "Expected `}` before the end of the file.");
 
 const noxfile = `tasks:
   build:

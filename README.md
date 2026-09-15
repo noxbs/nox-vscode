@@ -1,6 +1,6 @@
 # [Nox](https://github.com/playfairs/nox) v1.1.6 Language Support for Visual Studio Code
 
-Syntax highlighting and live diagnostics for Nox project and task files. This
+Syntax highlighting and live diagnostics for Nox project, task, and NOML files. This
 extension supports Nox versions up to and including `v1.1.6`.
 
 The extension version is defined in `VERSION`. Before packaging locally, synchronize the VS Code manifest:
@@ -17,14 +17,16 @@ Recognized files:
 - `noxfile`
 - `nox.state`
 - `*.nox`
+- `*.noml`
 
 The extension highlights Nox project declarations, `let` bindings, targets, properties, strings, comments, booleans, numbers, and native expressions such as `file()`, `glob()`, and `license = file("./LICENSE")`.
+NOML files receive syntax highlighting for rulesets, entries, properties, strings, comments, booleans, numbers, and punctuation, plus the existing Nox language icon until a dedicated NOML icon is available.
 
 The runtime is organized under `src/`: activation lives in `src/extension.js`, document linting in `src/lint/index.js`, and build parsing in `src/lint/build.js`.
 
 ## Development
 
-Open this folder in VS Code and press `F5` to launch an Extension Development Host. Open a `nox.build` or `noxfile` there to inspect the highlighting.
+Open this folder in VS Code and press `F5` to launch an Extension Development Host. Open a `nox.build`, `noxfile`, or `.noml` file there to inspect the highlighting.
 
 Use `Developer: Inspect Editor Tokens and Scopes` from the Command Palette to inspect grammar scopes.
 

@@ -1,9 +1,11 @@
 const { lintBuild } = require("./build");
+const { lintNoml } = require("./noml");
 
 function lintDocument(text, filename) {
   if (filename === "nox.build") return lintBuild(text);
   if (filename === "noxfile") return lintNoxfile(text);
   if (filename === "nox.state") return lintState(text);
+  if (filename.endsWith(".noml")) return lintNoml(text);
   return [];
 }
 
@@ -97,4 +99,4 @@ function lineError(text, lineIndex, line, message) {
   return { start, end: start + Math.max(1, line.length), message };
 }
 
-module.exports = { lintDocument, lintNoxfile, lintState };
+module.exports = { lintDocument, lintNoml, lintNoxfile, lintState };

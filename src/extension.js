@@ -7,7 +7,7 @@ const diagnosticSource = "Nox";
 function activate(context) {
   const diagnostics = vscode.languages.createDiagnosticCollection("nox");
   const lint = (document) => {
-    if (document.languageId !== "nox") return;
+    if (document.languageId !== "nox" && document.languageId !== "noml") return;
     if (isExcluded(document)) {
       diagnostics.delete(document.uri);
       return;

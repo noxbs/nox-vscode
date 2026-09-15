@@ -1,0 +1,137 @@
+{
+  "name": "NOML",
+  "scopeName": "source.noml",
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#rulesets"
+    },
+    {
+      "include": "#entries"
+    },
+    {
+      "include": "#properties"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#booleans"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#punctuation"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.noml",
+          "match": "#.*$"
+        },
+        {
+          "name": "comment.line.double-slash.noml",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.noml",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.noml",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.noml",
+          "match": "\\\\(?:[nrt\\\\\"]|u[0-9A-Fa-f]{4})"
+        }
+      ]
+    },
+    "rulesets": {
+      "patterns": [
+        {
+          "match": "\\b(ruleset)\\s+(\"[^\"]+\"|[A-Za-z_][\\w-]*)",
+          "captures": {
+            "1": {
+              "name": "keyword.control.ruleset.noml"
+            },
+            "2": {
+              "name": "entity.name.type.ruleset.noml"
+            }
+          }
+        }
+      ]
+    },
+    "entries": {
+      "patterns": [
+        {
+          "match": "^(\\s*)([A-Za-z_][\\w-]*)\\s*:\\s*(\"[^\"]+\"|[A-Za-z_][\\w.-]*)",
+          "captures": {
+            "2": {
+              "name": "storage.type.entry.noml"
+            },
+            "3": {
+              "name": "entity.name.function.entry.noml"
+            }
+          }
+        },
+        {
+          "name": "keyword.control.extends.noml",
+          "match": "\\bextends\\b"
+        }
+      ]
+    },
+    "properties": {
+      "patterns": [
+        {
+          "name": "entity.name.tag.property.noml",
+          "match": "\\b[A-Za-z_][\\w-]*(?=\\s*:)"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "constant.language.null.noml",
+          "match": "\\bnull\\b"
+        }
+      ]
+    },
+    "booleans": {
+      "patterns": [
+        {
+          "name": "constant.language.boolean.noml",
+          "match": "\\b(?:true|false)\\b"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.noml",
+          "match": "\\b-?\\d+(?:\\.\\d+)?\\b"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "name": "punctuation.definition.noml",
+          "match": "[{}\\[\\],:]"
+        }
+      ]
+    }
+  }
+}
