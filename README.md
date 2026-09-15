@@ -1,7 +1,7 @@
-# [Nox](https://github.com/playfairs/nox) v1.1.5 Language Support for Visual Studio Code
+# [Nox](https://github.com/playfairs/nox) v1.1.6 Language Support for Visual Studio Code
 
 Syntax highlighting and live diagnostics for Nox project and task files. This
-extension supports Nox versions up to and including `v1.1.5`.
+extension supports Nox versions up to and including `v1.1.6`.
 
 The extension version is defined in `VERSION`. Before packaging locally, synchronize the VS Code manifest:
 
@@ -16,8 +16,9 @@ Recognized files:
 - `nox.build`
 - `noxfile`
 - `nox.state`
+- `*.nox`
 
-The extension highlights Nox project declarations, `let` bindings, targets, properties, strings, comments, booleans, numbers, and native expressions such as `file()` and `glob()`.
+The extension highlights Nox project declarations, `let` bindings, targets, properties, strings, comments, booleans, numbers, and native expressions such as `file()`, `glob()`, and `license = file("./LICENSE")`.
 
 The runtime is organized under `src/`: activation lives in `src/extension.js`, document linting in `src/lint/index.js`, and build parsing in `src/lint/build.js`.
 
