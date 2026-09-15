@@ -31,6 +31,7 @@ assert.equal(
 const source = `project "ripnet" {
   version = file("./VERSION")
   version_files = ["VERSION", "package.json"]
+  license = file("./LICENSE")
   d_executable "ripnet" {
     sources = ["src/main.d"]
     install = true

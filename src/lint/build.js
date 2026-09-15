@@ -193,7 +193,8 @@ class BuildParser {
     this.expectSymbol("=", `Expected \`=\` after ${property}.`);
     if (property === "dependencies" || property === "version_files")
       this.parseArray(property === "version_files" ? "version file" : "dependency");
-    else if (property === "version") this.parseValueOrFile("version");
+    else if (property === "version" || property === "license")
+      this.parseValueOrFile(property);
     else this.takeValue(property);
   }
 
