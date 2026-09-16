@@ -12,6 +12,9 @@
       "include": "#keywords"
     },
     {
+      "include": "#target-qualifiers"
+    },
+    {
       "include": "#task-declarations"
     },
     {
@@ -40,6 +43,24 @@
     }
   ],
   "repository": {
+    "target-qualifiers": {
+      "patterns": [
+        {
+          "match": "\\b(executable)(\\.)(rust|cpp|c|d|haskell|swift|fsharp|javascript|typescript|python)\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.control.nox"
+            },
+            "2": {
+              "name": "punctuation.accessor.nox"
+            },
+            "3": {
+              "name": "storage.type.language.nox"
+            }
+          }
+        }
+      ]
+    },
     "comments": {
       "patterns": [
         {
@@ -72,7 +93,7 @@
       "patterns": [
         {
           "name": "keyword.control.nox",
-          "match": "\\b(project|let|set|executable|cxx_executable|static_library|static|shared_library|shared|rust_executable|rust_library|d_executable|task|tasks)\\b"
+          "match": "\\b(project|let|set|executable|static_library|static|shared_library|shared|rust_library|task|tasks)\\b"
         }
       ]
     },

@@ -36,7 +36,7 @@
     ["\"", "\""]
   ],
   "indentationRules": {
-    "increaseIndentPattern": "^\\s*(project|executable|static_library|shared_library|rust_executable|rust_library)\\b.*\\{\\s*$",
+    "increaseIndentPattern": "^\\s*(project|executable(?:\\.[A-Za-z]+)?|static_library|shared_library|rust_library)\\b.*\\{\\s*$",
     "decreaseIndentPattern": "^\\s*\\}"
   }
 }

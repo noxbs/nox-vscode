@@ -45,7 +45,7 @@ const source = `project "ripnet" {
   version = file("./VERSION")
   version_files = ["VERSION", "package.json"]
   license = file("./LICENSE")
-  d_executable "ripnet" {
+  executable.d "ripnet" {
     sources = ["src/main.d"]
     install = true
   }
@@ -66,12 +66,23 @@ const currentSyntax = `project "example" {
     install = should_install
   }
 
-  cxx_executable "cpp-app" {
+  executable.cpp "cpp-app" {
     sources = ["main.cpp"]
   }
 }`;
 
 assert.deepEqual(lintBuild(currentSyntax), []);
+
+const unsupportedExecutableLanguage = `project "example" {
+  executable.ruby "app" {
+    sources = ["main.rb"]
+  }
+}`;
+
+assert.equal(
+  lintBuild(unsupportedExecutableLanguage)[0].message,
+  "Unsupported executable language `ruby`.",
+);
 
 const duplicateBinding = `project "example" {
   let flags = ["-Wall"]

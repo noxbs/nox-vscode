@@ -4,7 +4,7 @@ project "nox-language-support" {
     license = "Unlicense"
     version_files = ["VERSION"]
 
-    executable "nox-language-support" {
+    executable.javascript "nox-language-support" {
         sources = [
             "src/extension.js",
             "src/lint/index.js",

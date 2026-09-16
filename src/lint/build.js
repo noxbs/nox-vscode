@@ -8,14 +8,23 @@ const projectMembers = new Set([
 ]);
 const targetKinds = new Set([
   "executable",
-  "cxx_executable",
-  "d_executable",
   "static_library",
   "static",
   "shared_library",
   "shared",
-  "rust_executable",
   "rust_library",
+]);
+const executableLanguages = new Set([
+  "rust",
+  "cpp",
+  "c",
+  "d",
+  "haskell",
+  "swift",
+  "fsharp",
+  "javascript",
+  "typescript",
+  "python",
 ]);
 const targetProperties = new Set([
   "sources",
@@ -67,7 +76,7 @@ function tokenize(text, errors) {
       index = end + 2;
       continue;
     }
-    if ("{}[]=(),".includes(character)) {
+    if ("{}[]=(),.".includes(character)) {
       tokens.push({
         type: "symbol",
         value: character,
@@ -116,7 +125,7 @@ function tokenize(text, errors) {
     while (
       index < text.length &&
       !/\s/.test(text[index]) &&
-      !'{}[]=(),"'.includes(text[index])
+      !'{}[]=(),."'.includes(text[index])
     )
       index += 1;
     tokens.push({
@@ -214,6 +223,16 @@ class BuildParser {
   }
 
   parseTarget(kind) {
+    if (kind === "executable" && this.takeSymbol(".")) {
+      const language = this.takeWord();
+      if (!language || !executableLanguages.has(language.value)) {
+        this.errors.push({
+          start: language?.start || this.currentStart(),
+          end: language?.end || this.currentEnd(),
+          message: `Unsupported executable language \`${language?.value || ""}\`.`,
+        });
+      }
+    }
     const name = this.takeValue("target name");
     if (!name) return;
     this.expectSymbol("{", `Expected \`{\` after ${kind} target name.`);
