@@ -2,7 +2,7 @@
   "name": "nox-language-support",
   "displayName": "Nox Language Support",
   "description": "Syntax highlighting for Nox build files and task files.",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "publisher": "playfairs",
   "license": "Unlicense",
   "icon": "assets/nox-icon.png",
@@ -74,8 +74,8 @@
           ".noml"
         ],
         "icon": {
-          "light": "./assets/nox-icon.png",
-          "dark": "./assets/nox-icon.png"
+          "light": "./assets/noml.png",
+          "dark": "./assets/noml.png"
         },
         "configuration": "./noml-language-configuration.json"
       }
