@@ -5,6 +5,10 @@ const projectMembers = new Set([
   "license",
   "edition",
   "dependencies",
+  "repository",
+  "website",
+  "authors",
+  "maintainers",
 ]);
 const targetKinds = new Set([
   "executable",
@@ -200,8 +204,19 @@ class BuildParser {
 
   parseProjectProperty(property) {
     this.expectSymbol("=", `Expected \`=\` after ${property}.`);
-    if (property === "dependencies" || property === "version_files")
-      this.parseArray(property === "version_files" ? "version file" : "dependency");
+    if (
+      property === "dependencies" ||
+      property === "version_files" ||
+      property === "authors" ||
+      property === "maintainers"
+    )
+      this.parseArray(
+        property === "version_files"
+          ? "version file"
+          : property === "dependencies"
+            ? "dependency"
+            : "person",
+      );
     else if (property === "version" || property === "license")
       this.parseValueOrFile(property);
     else this.takeValue(property);

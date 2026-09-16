@@ -73,6 +73,20 @@ const currentSyntax = `project "example" {
 
 assert.deepEqual(lintBuild(currentSyntax), []);
 
+const projectMetadata = `project "nox" {
+  version = "1.2.3"
+  repository = "https://example.com/repo"
+  website = "https://example.com"
+  authors = ["alice", "bob"]
+  maintainers = ["carol <carol@example.com>"]
+
+  executable.rust "nox" {
+    sources = ["src/main.rs"]
+  }
+}`;
+
+assert.deepEqual(lintBuild(projectMetadata), []);
+
 const unsupportedExecutableLanguage = `project "example" {
   executable.ruby "app" {
     sources = ["main.rb"]
