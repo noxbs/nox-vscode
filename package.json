@@ -52,7 +52,6 @@
         "filenames": [
           "nox.build",
           "noxfile",
-          "nox.config",
           "nox.state"
         ],
         "extensions": [
