@@ -87,6 +87,19 @@ const projectMetadata = `project "nox" {
 
 assert.deepEqual(lintBuild(projectMetadata), []);
 
+const projectEnv = `project "demo" {
+  extra.env {
+    RUST_BACKTRACE = "full"
+    CARGO_TERM_COLOR = "always"
+  }
+
+  executable.rust "demo" {
+    sources = ["src/main.rs"]
+  }
+}`;
+
+assert.deepEqual(lintBuild(projectEnv), []);
+
 const unsupportedExecutableLanguage = `project "example" {
   executable.ruby "app" {
     sources = ["main.rb"]
