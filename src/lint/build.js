@@ -9,6 +9,7 @@ const projectMembers = new Set([
   "website",
   "authors",
   "maintainers",
+  "extra",
 ]);
 const targetKinds = new Set([
   "executable",
@@ -182,6 +183,7 @@ class BuildParser {
         this.errorAtPrevious("Projects cannot be nested.");
       else if (targetKinds.has(member.value)) this.parseTarget(member.value);
       else if (member.value === "let") this.parseBinding();
+      else if (member.value === "extra") this.parseExtra();
       else if (projectMembers.has(member.value))
         this.parseProjectProperty(member.value);
       else {
@@ -220,6 +222,34 @@ class BuildParser {
     else if (property === "version" || property === "license")
       this.parseValueOrFile(property);
     else this.takeValue(property);
+  }
+
+  parseExtra() {
+    this.expectSymbol(".", "Expected `.` after `extra`.");
+    const section = this.takeWord();
+    if (!section || section.value !== "env") {
+      this.errors.push({
+        start: section?.start || this.currentStart(),
+        end: section?.end || this.currentEnd(),
+        message: "Expected `extra.env`.",
+      });
+      return;
+    }
+    this.expectSymbol("{", "Expected `{` after `extra.env`.");
+    while (!this.atEnd() && !this.takeSymbol("}")) {
+      const name = this.takeValue("environment variable name");
+      if (!name) {
+        this.recover();
+        continue;
+      }
+      this.expectSymbol("=", `Expected \`=\` after ${name.value}.`);
+      const value = this.takeValue(`value for ${name.value}`);
+      if (!value) {
+        this.recover();
+        continue;
+      }
+      this.takeSymbol(",");
+    }
   }
 
   parseBinding() {
