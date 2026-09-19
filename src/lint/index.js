@@ -82,8 +82,12 @@ function lintNoxfile(text) {
 function lintState(text) {
   const errors = [];
   text.split(/\r?\n/).forEach((line, lineIndex) => {
-    if (!line.trim()) return;
-    if (!/^[^=\s]+=.*/.test(line))
+    const trimmed = line.trim();
+    if (!trimmed) return;
+    if (trimmed.startsWith("#") || trimmed.startsWith("//")) return;
+
+    const content = trimmed.replace(/\s+(?:#|\/\/).*$/, "");
+    if (!/^[^=\s]+=.*/.test(content))
       errors.push(
         lineError(text, lineIndex, line, "Expected a `key=value` state entry."),
       );
