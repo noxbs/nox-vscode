@@ -53,6 +53,16 @@ const source = `project "ripnet" {
 
 assert.deepEqual(lintBuild(source), []);
 
+const topLevelSettings = `set swift_settings_object := \`swiftc -parse-as-library -c SettingsView.swift\`
+
+project "example" {
+  executable "example" {
+    sources = ["main.cpp"]
+  }
+}`;
+
+assert.deepEqual(lintBuild(topLevelSettings), []);
+
 const currentSyntax = `project "example" {
   let source_files = ["main.c"]
   let include_paths = ["include"]

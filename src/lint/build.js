@@ -126,6 +126,26 @@ function tokenize(text, errors) {
       tokens.push({ type: "string", value, start, end: index });
       continue;
     }
+    if (character === "`") {
+      const start = index;
+      const end = text.indexOf("`", index + 1);
+      if (end === -1) {
+        errors.push({
+          start,
+          end: text.length,
+          message: "Unterminated command substitution.",
+        });
+        return tokens;
+      }
+      tokens.push({
+        type: "word",
+        value: text.slice(start, end + 1),
+        start,
+        end: end + 1,
+      });
+      index = end + 1;
+      continue;
+    }
     const start = index;
     while (
       index < text.length &&
@@ -158,12 +178,8 @@ class BuildParser {
   }
 
   parse() {
-    if (
-      !this.expectWord(
-        "project",
-        "Expected a project declaration at the beginning of the file.",
-      )
-    )
+    while (this.peek()?.value === "set") this.parseTopLevelSetting();
+    if (!this.expectWord("project", "Expected a project declaration after top-level settings."))
       return;
     this.takeValue("project name");
     this.expectSymbol("{", "Expected `{` after the project name.");
@@ -202,6 +218,16 @@ class BuildParser {
             message: `Unknown target dependency \`${dependency}\`.`,
           });
       }
+  }
+
+  parseTopLevelSetting() {
+    this.expectWord("set", "Expected a top-level setting.");
+    const name = this.takeValue("setting name");
+    if (!name) return;
+    this.expectSymbol(":", `Expected \`:=\` after setting ${name.value}.`);
+    this.expectSymbol("=", `Expected \`:=\` after setting ${name.value}.`);
+    if (this.peek()?.value === "[") this.parseArray("setting");
+    else this.takeValue(`value for setting ${name.value}`);
   }
 
   parseProjectProperty(property) {
