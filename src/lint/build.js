@@ -30,6 +30,8 @@ const executableLanguages = new Set([
   "javascript",
   "typescript",
   "python",
+  "kotlin",
+  "gradle",
 ]);
 const targetProperties = new Set([
   "sources",
@@ -40,6 +42,14 @@ const targetProperties = new Set([
   "defines",
   "flags",
   "linker_flags",
+  "gradle_tasks",
+  "tasks",
+  "gradle_options",
+  "options",
+  "gradle_run_tasks",
+  "run_tasks",
+  "gradle_run_options",
+  "run_options",
   "install",
 ]);
 

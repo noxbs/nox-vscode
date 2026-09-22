@@ -83,6 +83,26 @@ const currentSyntax = `project "example" {
 
 assert.deepEqual(lintBuild(currentSyntax), []);
 
+const gradleSyntax = `project "oatmeal" {
+  executable.kotlin "app" {
+    sources = ["app/src/main/kotlin/Main.kt"]
+  }
+
+  executable.gradle "build" {
+    gradle_tasks = [":app:build"]
+    gradle_options = ["--offline", "--stacktrace"]
+    gradle_run_tasks = [":app:run"]
+    gradle_run_options = ["--console=plain"]
+  }
+
+  executable.gradle "test" {
+    tasks = [":app:test"]
+    options = ["--console=plain"]
+  }
+}`;
+
+assert.deepEqual(lintBuild(gradleSyntax), []);
+
 const projectMetadata = `project "nox" {
   version = "1.2.3"
   repository = "https://example.com/repo"

@@ -46,7 +46,7 @@
     "target-qualifiers": {
       "patterns": [
         {
-          "match": "\\b(executable)(\\.)(rust|cpp|c|d|haskell|swift|fsharp|javascript|typescript|python)\\b",
+          "match": "\\b(executable)(\\.)(rust|cpp|c|d|haskell|swift|fsharp|javascript|typescript|python|kotlin|gradle)\\b",
           "captures": {
             "1": {
               "name": "keyword.control.nox"
@@ -168,7 +168,7 @@
       "patterns": [
         {
           "name": "variable.other.property.nox",
-          "match": "\\b(version|version_files|description|license|edition|dependencies|repository|website|authors|maintainers|sources|depends|include_dirs|includes|defines|flags|linker_flags|install|run)\\b(?=\\s*(=|:))"
+          "match": "\\b(version|version_files|description|license|edition|dependencies|repository|website|authors|maintainers|sources|depends|include_dirs|includes|defines|flags|linker_flags|gradle_tasks|tasks|gradle_options|options|gradle_run_tasks|run_tasks|gradle_run_options|run_options|install|run)\\b(?=\\s*(=|:))"
         }
       ]
     },
