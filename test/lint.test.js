@@ -83,6 +83,18 @@ const currentSyntax = `project "example" {
 
 assert.deepEqual(lintBuild(currentSyntax), []);
 
+const dotnetSyntax = `project "dotnet-demo" {
+  executable.qsharp "app" {
+    sources = ["src/main.qs"]
+  }
+
+  executable.csharp "lib" {
+    sources = ["src/Program.cs"]
+  }
+}`;
+
+assert.deepEqual(lintBuild(dotnetSyntax), []);
+
 const gradleSyntax = `project "oatmeal" {
   executable.kotlin "app" {
     sources = ["app/src/main/kotlin/Main.kt"]

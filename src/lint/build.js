@@ -27,10 +27,16 @@ const executableLanguages = new Set([
   "haskell",
   "swift",
   "fsharp",
+  "f#",
+  "csharp",
+  "c#",
+  "cs",
   "javascript",
   "typescript",
   "python",
   "kotlin",
+  "qsharp",
+  "qs",
   "gradle",
 ]);
 const targetProperties = new Set([
