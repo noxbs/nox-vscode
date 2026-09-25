@@ -13,6 +13,8 @@ const projectMembers = new Set([
 ]);
 const targetKinds = new Set([
   "executable",
+  "library",
+  "qsharp_library",
   "static_library",
   "static",
   "shared_library",
@@ -319,6 +321,32 @@ class BuildParser {
           message: `Unsupported executable language \`${language?.value || ""}\`.`,
         });
       }
+    }
+    if (kind === "library") {
+      const libraryKind = this.takeSymbol(".") && this.takeWord();
+      if (!libraryKind || !["qsharp", "rust", "static", "shared"].includes(libraryKind.value)) {
+        this.errors.push({
+          start: libraryKind?.start || this.currentStart(),
+          end: libraryKind?.end || this.currentEnd(),
+          message: `Unsupported library kind \`${libraryKind?.value || ""}\`.`,
+        });
+      }
+    } else if (["qsharp_library", "rust_library", "static_library", "static", "shared_library", "shared"].includes(kind)) {
+      const token = this.tokens[this.index - 1];
+      const replacement = {
+        qsharp_library: "library.qsharp",
+        rust_library: "library.rust",
+        static_library: "library.static",
+        static: "library.static",
+        shared_library: "library.shared",
+        shared: "library.shared",
+      }[kind];
+      this.errors.push({
+        start: token.start,
+        end: token.end,
+        severity: 1,
+        message: `\`${kind}\` is deprecated; use \`${replacement}\` instead. It will be removed in v1.3.0.`,
+      });
     }
     const name = this.takeValue("target name");
     if (!name) return;

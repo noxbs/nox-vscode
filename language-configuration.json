@@ -36,7 +36,7 @@
     ["\"", "\""]
   ],
   "indentationRules": {
-    "increaseIndentPattern": "^\\s*(project|executable(?:\\.[A-Za-z]+)?|static_library|shared_library|rust_library)\\b.*\\{\\s*$",
+    "increaseIndentPattern": "^\\s*(project|executable(?:\\.[A-Za-z]+)?|library(?:\\.[A-Za-z]+)?|static_library|shared_library|rust_library|qsharp_library)\\b.*\\{\\s*$",
     "decreaseIndentPattern": "^\\s*\\}"
   }
 }

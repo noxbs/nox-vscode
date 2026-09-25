@@ -46,7 +46,7 @@
     "target-qualifiers": {
       "patterns": [
         {
-          "match": "\\b(executable)(\\.)(rust|cpp|c|d|haskell|swift|fsharp|javascript|typescript|python|kotlin|gradle)\\b",
+          "match": "\\b(executable|library)(\\.)(rust|cpp|c|d|haskell|swift|fsharp|javascript|typescript|python|kotlin|qsharp|gradle|static|shared)\\b",
           "captures": {
             "1": {
               "name": "keyword.control.nox"
@@ -93,7 +93,7 @@
       "patterns": [
         {
           "name": "keyword.control.nox",
-          "match": "\\b(project|let|set|executable|static_library|static|shared_library|shared|rust_library|task|tasks)\\b"
+          "match": "\\b(project|let|set|executable|library|qsharp_library|static_library|static|shared_library|shared|rust_library|task|tasks)\\b"
         }
       ]
     },

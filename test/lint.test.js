@@ -79,9 +79,38 @@ const currentSyntax = `project "example" {
   executable.cpp "cpp-app" {
     sources = ["main.cpp"]
   }
+
+  library.static "static-lib" {
+    sources = ["static.c"]
+  }
+
+  library.shared "shared-lib" {
+    sources = ["shared.c"]
+  }
+
+  library.rust "rust-lib" {
+    sources = ["src/lib.rs"]
+  }
+
+  library.qsharp "qsharp-lib" {
+    sources = ["src/lib.qs"]
+  }
 }`;
 
 assert.deepEqual(lintBuild(currentSyntax), []);
+
+const deprecatedLibrarySyntax = `project "legacy" {
+  static_library "static" {
+    sources = ["static.c"]
+  }
+  qsharp_library "qsharp" {
+    sources = ["lib.qs"]
+  }
+}`;
+
+assert.equal(lintBuild(deprecatedLibrarySyntax).length, 2);
+assert.equal(lintBuild(deprecatedLibrarySyntax)[0].severity, 1);
+assert.match(lintBuild(deprecatedLibrarySyntax)[0].message, /v1\.3\.0/);
 
 const dotnetSyntax = `project "dotnet-demo" {
   executable.qsharp "app" {
