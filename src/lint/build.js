@@ -345,7 +345,7 @@ class BuildParser {
         start: token.start,
         end: token.end,
         severity: 1,
-        message: `\`${kind}\` is deprecated; use \`${replacement}\` instead. It will be removed in v1.3.0.`,
+        message: `\`${kind}\` is deprecated; use \`${replacement}\` instead. It will be removed in v1.5.0.`,
       });
     }
     const name = this.takeValue("target name");

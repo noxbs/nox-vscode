@@ -2,7 +2,7 @@
   "name": "nox-language-support",
   "displayName": "Nox Language Support",
   "description": "Syntax highlighting for Nox build files and task files.",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "publisher": "playfairs",
   "license": "Unlicense",
   "icon": "assets/nox-icon.png",

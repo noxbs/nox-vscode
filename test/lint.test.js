@@ -110,7 +110,7 @@ const deprecatedLibrarySyntax = `project "legacy" {
 
 assert.equal(lintBuild(deprecatedLibrarySyntax).length, 2);
 assert.equal(lintBuild(deprecatedLibrarySyntax)[0].severity, 1);
-assert.match(lintBuild(deprecatedLibrarySyntax)[0].message, /v1\.3\.0/);
+assert.match(lintBuild(deprecatedLibrarySyntax)[0].message, /v1\.5\.0/);
 
 const dotnetSyntax = `project "dotnet-demo" {
   executable.qsharp "app" {
